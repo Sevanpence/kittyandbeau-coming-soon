@@ -1,106 +1,75 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ffe16a">
-<meta name="description" content="Oh, just you wait... It's going to be Beau-nanas!">
-<title>Kitty & Beau — Beau-nanas!</title>
-<style>
-:root{--ink:#25212b;--colour:#ff4c9a}*{box-sizing:border-box}
-body{margin:0;background:#ffe56f;background-image:radial-gradient(#eec653 1.5px,transparent 1.5px);background-size:21px 21px;color:var(--ink);font-family:"Comic Sans MS","Comic Sans",cursive,sans-serif}
-button{cursor:pointer;font:inherit}button:focus-visible{outline:4px dashed #e22a81;outline-offset:3px}
-.container{max-width:1100px;margin:0 auto;padding:15px 14px 25px}
-.sign{text-align:center;font-weight:1000;color:#6839bd;font-size:clamp(17px,2.8vw,25px);text-shadow:2px 2px #fff;transform:rotate(-2deg);margin:8px 0 21px}
-.window{border:3px solid;border-color:#fff #555 #555 #fff;background:#c9c9c9;box-shadow:11px 13px 0 #36243133,0 0 0 2px #696969;padding:4px}
-.titlebar{min-height:36px;background:linear-gradient(90deg,#12187f,#1478e2);color:#fff;font:700 15px Tahoma,Arial,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:5px 8px;gap:8px}
-.windowtitle{white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.windowbuttons{display:flex;gap:3px;flex-shrink:0}.windowbuttons span{background:#c9c9c9;color:#1c1c1c;width:24px;height:22px;display:grid;place-items:center;border:2px solid;border-color:#fff #777 #777 #fff;font:900 13px Tahoma,Arial}
-.menu{display:flex;gap:18px;padding:8px 13px;font:14px Tahoma,Arial,sans-serif;white-space:nowrap}
-.workspace{display:grid;grid-template-columns:79px minmax(0,1fr);gap:8px;background:#aaa;padding:7px}
-.toolbar{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:39px;gap:3px;align-content:start}
-.tool{display:grid;place-items:center;font:24px Arial,sans-serif;border:2px solid;border-color:#fff #777 #777 #fff;background:#ccc}.tool.current{border-color:#777 #fff #fff #777;background:#fff3a3}
-.canvas{min-width:0;min-height:640px;position:relative;overflow:hidden;isolation:isolate;background:#fffefa;background-image:linear-gradient(#f3ebf8 1px,transparent 1px),linear-gradient(90deg,#f3ebf8 1px,transparent 1px);background-size:36px 36px;border:2px solid;border-color:#666 #fff #fff #666;cursor:crosshair;touch-action:manipulation}
-.decor{position:absolute;pointer-events:none;z-index:0}
-.rainbow{left:2%;top:4%;width:150px;transform:rotate(-12deg)}.sun{right:2%;top:3%;width:140px;transform:rotate(12deg)}.heart{right:5%;top:36%;width:90px;transform:rotate(19deg)}.star{left:4%;bottom:17%;width:96px;transform:rotate(-18deg)}
-.words{position:relative;z-index:3;text-align:center;padding:100px 12px 0;pointer-events:none}
-.first{color:#313ddd;font-size:clamp(20px,3.9vw,37px);font-weight:1000;text-shadow:2px 3px #ffde43;transform:rotate(-3deg)}
-.second{font-weight:1000;color:#e83186;font-size:clamp(15px,2.9vw,24px);margin-top:19px;transform:rotate(2deg)}
-.big{font-size:clamp(50px,9vw,115px);font-weight:1000;letter-spacing:-.075em;line-height:1.07;transform:rotate(-4deg);color:#ffe833;-webkit-text-stroke:clamp(2px,.5vw,6px) #221c2a;paint-order:stroke fill;text-shadow:5px 8px #fd70b3,10px 12px #2b2532;margin:5px 0 0;overflow-wrap:anywhere}
-.big .beau{color:#ff76bc}
-.banana-area{position:relative;z-index:4;display:flex;justify-content:center;margin-top:0}
-.banana{display:block;width:285px;max-width:70%;padding:0;border:0;background:transparent;filter:drop-shadow(7px 9px 0 #edbfdf);transform:rotate(-8deg);transition:transform .2s}
-.banana:hover{transform:rotate(4deg) scale(1.06)}.banana svg{width:100%;height:auto;display:block}
-.banana.dancing{animation:dance .44s 3 ease-in-out}@keyframes dance{0%,100%{transform:rotate(-8deg)}25%{transform:rotate(20deg) translateY(-15px)}75%{transform:rotate(-22deg) translateY(-7px)}}
-.laugh{position:absolute;top:20px;left:calc(50% + 120px);font-size:23px;transform:rotate(17deg);font-weight:1000;color:#8536c1;white-space:nowrap}
-.coming{position:relative;z-index:4;width:max-content;max-width:90%;padding:9px 16px;margin:-3px auto 27px;background:#77f1c9;border:4px solid #27202a;box-shadow:5px 5px #ff4c9a;transform:rotate(3deg);font-weight:1000;font-size:clamp(16px,2.6vw,26px);pointer-events:none}
-.stamp{position:absolute;z-index:2;pointer-events:none;font-size:38px;line-height:1;font-weight:900;-webkit-text-stroke:1px #24202a;animation:pop .22s backwards}@keyframes pop{from{opacity:0;transform:scale(.15) rotate(50deg)}to{opacity:1;transform:scale(1) rotate(-13deg)}}
-.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 13px}
-.inkpreview{display:grid;place-items:center;width:40px;height:40px;background:#fff;border:2px solid;border-color:#777 #fff #fff #777}.inkpreview:after{content:"";width:25px;height:25px;background:var(--colour);border:1px solid #333}
-.palette{display:grid;grid-template-columns:repeat(8,22px);gap:3px}.swatch{width:22px;height:22px;border:2px solid;border-color:#777 #fff #fff #777;background:var(--swatch);padding:0}.swatch[aria-pressed=true]{outline:2px dashed #28202c;outline-offset:2px}
-.actions{margin-left:auto;display:flex;gap:8px}.action{background:#ff5da9;border:3px solid;border-color:#fff #555 #555 #fff;font-size:13px;font-weight:1000;padding:10px;box-shadow:2px 2px #666}.action.alt{background:#d7eeff}.action:active{border-color:#555 #fff #fff #555;box-shadow:none}
-.status{border-top:1px solid #eee;padding:5px 10px;display:flex;justify-content:space-between;gap:8px;font:12px Tahoma,Arial,sans-serif}
-.under{text-align:center;color:#502883;font-weight:1000;transform:rotate(1deg);margin:24px 0 8px}.under span{background:#fff;padding:5px 10px;box-shadow:4px 4px #ff64a2}
-@media(max-width:650px){.container{padding:12px 6px 24px}.sign{margin:5px 0 13px}.window{border-width:2px;padding:3px}.titlebar{font-size:12px}.menu{gap:11px;font-size:12px;padding:7px 8px}.workspace{grid-template-columns:37px minmax(0,1fr);gap:4px;padding:4px}.toolbar{grid-template-columns:1fr;grid-auto-rows:36px}.tool{font-size:20px}.tool:nth-child(n+9){display:none}.canvas{min-height:575px}.rainbow{width:80px;top:6%;left:2%}.sun{width:76px;top:4%;right:1%}.heart{width:55px}.star{width:65px}.words{padding:117px 5px 0}.first{font-size:clamp(17px,4.8vw,27px)}.second{font-size:clamp(15px,4vw,20px);margin-top:19px}.big{font-size:clamp(43px,12.2vw,79px);text-shadow:3px 5px #fd70b3,6px 7px #2b2532}.banana-area{margin-top:17px}.banana{width:225px;max-width:83%}.laugh{left:auto;right:2%;font-size:14px}.coming{font-size:16px;padding:8px 11px;margin:4px auto 23px}.controls{gap:8px}.palette{grid-template-columns:repeat(8,19px)}.swatch{width:19px;height:19px}.inkpreview{width:32px;height:34px}.inkpreview:after{width:20px;height:20px}.actions{width:100%;margin-left:0}.action{flex:1;font-size:12px}.status{font-size:10px}.under{font-size:13px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-</style></head>
-<body><main class="container">
-<p class="sign">⭐ a VERY important announcement!!! ⭐</p>
-<section class="window" aria-label="Paint-style coming soon website">
-<div class="titlebar"><span class="windowtitle">🎨 kitty_and_beau_FINAL_final_v7.bmp - Paint</span><span class="windowbuttons" aria-hidden="true"><span>_</span><span>□</span><span>×</span></span></div>
-<div class="menu" aria-hidden="true"><span><u>F</u>ile</span><span><u>E</u>dit</span><span><u>V</u>iew</span><span><u>I</u>mage</span><span><u>C</u>olors</span><span><u>H</u>elp</span></div>
-<div class="workspace"><aside class="toolbar" aria-hidden="true"><span class="tool">↖</span><span class="tool">▧</span><span class="tool">✏️</span><span class="tool current">🖌️</span><span class="tool">🪣</span><span class="tool">A</span><span class="tool">╱</span><span class="tool">▢</span><span class="tool">◯</span><span class="tool">✳</span></aside>
-<div class="canvas" id="canvas" aria-label="Click the picture to add colourful doodles">
-<svg class="decor rainbow" viewBox="0 0 170 120" fill="none" aria-hidden="true"><path d="M10 110C10-19 157-16 161 110" stroke="#ff498f" stroke-width="14" stroke-linecap="round"/><path d="M29 108C27 7 140 7 141 108" stroke="#ff982b" stroke-width="13" stroke-linecap="round"/><path d="M49 108C49 29 117 28 119 108" stroke="#ffe12b" stroke-width="13" stroke-linecap="round"/><path d="M70 108C70 55 98 53 98 108" stroke="#54d7b0" stroke-width="13" stroke-linecap="round"/></svg>
-<svg class="decor sun" viewBox="0 0 140 140" fill="none" aria-hidden="true"><g stroke="#27202a" stroke-width="5" stroke-linecap="round"><path d="M69 7V23M69 116V134M7 71H24M116 71H134M22 24L34 35M106 106L118 118M116 24L105 36M34 105L21 119"/></g><circle cx="70" cy="70" r="43" fill="#ffe92e" stroke="#25202b" stroke-width="5"/><path d="M51 63v7m36-7v7" stroke="#25202b" stroke-width="6" stroke-linecap="round"/><path d="M52 85Q70 104 88 84" stroke="#25202b" stroke-width="5" stroke-linecap="round"/></svg>
-<svg class="decor heart" viewBox="0 0 100 95" aria-hidden="true"><path d="M51 87C34 68-3 45 12 21 22 5 43 13 51 28 63 7 85 9 91 27 98 48 65 76 51 87Z" fill="#ff8db9" stroke="#201b28" stroke-width="5" stroke-linejoin="round"/></svg>
-<svg class="decor star" viewBox="0 0 100 100" aria-hidden="true"><path d="M52 4L62 34 95 38 69 57 74 91 49 74 20 89 28 56 4 34 37 33Z" fill="#69f2d2" stroke="#27202a" stroke-width="5" stroke-linejoin="round"/></svg>
-<div class="words"><div class="first">OH, JUST YOU WAIT...</div><div class="second">IT'S GOING TO BE</div><div class="big"><span class="beau">BEAU</span>-<wbr>NANAS!</div></div>
-<div class="banana-area">
-<button class="banana" id="banana" type="button" aria-label="Make the banana dance">
-<svg viewBox="0 0 350 300" role="img" aria-labelledby="banana-title"><title id="banana-title">Happy hand-drawn banana with googly eyes and little legs</title>
-<g fill="none" stroke="#27212a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M107 188Q76 192 67 160m6 18-16-2"/><path d="M260 191q36-6 40-36m-14 15 18-1"/><path d="M158 254l-14 24-15 7M228 249l9 27 14 6"/></g>
-<path d="M65 73Q80 55 107 68C118 137 146 179 193 188 233 196 268 176 295 152 284 216 252 267 195 269 111 272 62 195 65 73Z" fill="#ffe945" stroke="#292029" stroke-width="7" stroke-linejoin="round"/>
-<path d="M75 92Q85 184 135 231" fill="none" stroke="#ffd04d" stroke-width="11" stroke-linecap="round"/>
-<path d="M108 75l-4-28-24-7-13 14 11 21" fill="#8d5d3a" stroke="#27202a" stroke-width="6" stroke-linejoin="round"/>
-<path d="M289 155l12-13 10 10-13 17Z" fill="#97623c" stroke="#27202a" stroke-width="5"/>
-<ellipse cx="167" cy="208" rx="16" ry="21" fill="#fff" stroke="#26202a" stroke-width="5" transform="rotate(-10 167 208)"/>
-<ellipse cx="211" cy="212" rx="16" ry="21" fill="#fff" stroke="#26202a" stroke-width="5" transform="rotate(9 211 212)"/>
-<circle cx="173" cy="215" r="7" fill="#22202b"/><circle cx="205" cy="217" r="7" fill="#22202b"/>
-<circle cx="147" cy="232" r="9" fill="#ff82ab" opacity=".9"/><circle cx="231" cy="235" r="9" fill="#ff82ab" opacity=".9"/>
-<path d="M178 238q12 15 23 0" fill="none" stroke="#28202a" stroke-width="5" stroke-linecap="round"/></svg>
-</button><span class="laugh" aria-hidden="true">hee hee!!</span></div>
-<div class="coming">🚧 COMING SOON(ISH) 🚧</div>
-</div></div>
-<div class="controls"><div class="inkpreview" aria-hidden="true"></div>
-<div class="palette" role="group" aria-label="Pick a doodle colour">
-<button class="swatch" style="--swatch:#25212b" data-colour="#25212b" aria-label="Black" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#ff4c9a" data-colour="#ff4c9a" aria-label="Pink" aria-pressed="true"></button>
-<button class="swatch" style="--swatch:#ff443c" data-colour="#ff443c" aria-label="Red" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#ff9b31" data-colour="#ff9b31" aria-label="Orange" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#fff036" data-colour="#fff036" aria-label="Yellow" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#33d980" data-colour="#33d980" aria-label="Green" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#47cefb" data-colour="#47cefb" aria-label="Sky blue" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#5947ed" data-colour="#5947ed" aria-label="Blue" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#773ec9" data-colour="#773ec9" aria-label="Purple" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#ba71e9" data-colour="#ba71e9" aria-label="Lavender" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#f6c2e0" data-colour="#f6c2e0" aria-label="Pale pink" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#fff" data-colour="#fff" aria-label="White" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#8f603a" data-colour="#8f603a" aria-label="Brown" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#bdff74" data-colour="#bdff74" aria-label="Lime" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#ffaabe" data-colour="#ffaabe" aria-label="Coral" aria-pressed="false"></button>
-<button class="swatch" style="--swatch:#fffacb" data-colour="#fffacb" aria-label="Cream" aria-pressed="false"></button>
-</div><div class="actions"><button class="action" id="more" type="button">✏️ MORE DOODLES!</button><button class="action alt" id="undo" type="button">↶ UN-DOODLE</button></div></div>
-<div class="status"><span id="status" role="status" aria-live="polite">Ready to make a masterpiece.</span><span>100% silly | 0% sensible</span></div>
-</section><p class="under"><span>Made with love, crayons & absolutely no adult supervision ♡</span></p></main>
-<script>
-(()=>{"use strict";
-const canvas=document.getElementById("canvas"),banana=document.getElementById("banana"),status=document.getElementById("status"),stamps=[];
-const shapes=["★","✿","♥","✦","☻","✳"];let colour="#ff4c9a";
-function say(){status.textContent=stamps.length?stamps.length+" extremely important doodle"+(stamps.length===1?"":"s")+" added!":"Ready to make a masterpiece."}
-function stamp(x,y){if(stamps.length>=40)stamps.shift().remove();const el=document.createElement("span");el.className="stamp";el.textContent=shapes[Math.floor(Math.random()*shapes.length)];el.setAttribute("aria-hidden","true");el.style.color=colour;el.style.left=Math.max(1,Math.min(94,x))+"%";el.style.top=Math.max(1,Math.min(94,y))+"%";canvas.appendChild(el);stamps.push(el);say()}
-document.querySelectorAll(".swatch").forEach(b=>b.addEventListener("click",()=>{colour=b.dataset.colour;document.documentElement.style.setProperty("--colour",colour);document.querySelectorAll(".swatch").forEach(item=>item.setAttribute("aria-pressed",String(item===b)));status.textContent="New colour! Make something silly!"}));
-document.getElementById("more").addEventListener("click",()=>{for(let i=0;i<6;i++)stamp(5+Math.random()*88,8+Math.random()*80)});
-document.getElementById("undo").addEventListener("click",()=>{const el=stamps.pop();if(el)el.remove();say()});
-canvas.addEventListener("click",e=>{if(e.target.closest("button"))return;const r=canvas.getBoundingClientRect();stamp((e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100)});
-banana.addEventListener("click",()=>{banana.classList.remove("dancing");void banana.offsetWidth;banana.classList.add("dancing");for(let i=0;i<9;i++)stamp(16+Math.random()*70,42+Math.random()*46);status.textContent="YOU HAVE ACTIVATED BEAU-NANA MODE 🍌"});
-})();
-</script></body></html>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Oh, just you wait... It's going to be Beau-nanas!">
+  <title>Kitty & Beau — Beau-nanas!</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 22px 12px 35px;
+      background: white;
+      color: black;
+      font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
+      text-align: center;
+    }
+    main { max-width: 800px; margin: 0 auto; }
+    .tiny { margin: 0 0 24px; color: #8c00c8; font-size: 17px; font-weight: bold; transform: rotate(-3deg); }
+    h1 { margin: 0; font-size: clamp(30px, 7vw, 56px); line-height: 1.15; font-weight: 900; color: #1111dc; transform: rotate(-2deg); }
+    .next { margin: 18px 0 5px; font-size: clamp(25px, 5vw, 39px); font-weight: bold; transform: rotate(2deg); }
+    .big { margin: 7px 0 0; font-size: clamp(42px, 10vw, 89px); line-height: 1.1; font-weight: 900; letter-spacing: -2px; color: #f30b9e; transform: rotate(-3deg); }
+    .big span { color: #d9ad00; }
+    .drawing { display: block; width: min(100%, 650px); margin: 1px auto 0; height: auto; }
+    .bottom { margin: -5px 0 0; font-size: clamp(20px, 4.5vw, 29px); color: #0f912f; font-weight: bold; transform: rotate(3deg); }
+    @media (max-width: 440px) {
+      body { padding-top: 24px; }
+      .tiny { margin-bottom: 28px; }
+      .next { margin-top: 21px; }
+      .drawing { margin-top: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="tiny">KITTY + BEAU :)</p>
+    <h1>Oh, just you wait...</h1>
+    <p class="next">It's going to be</p>
+    <p class="big">BEAU<span>-</span>NANAS!</p>
+
+    <!-- Intentionally terrible mouse-drawn MS Paint art. -->
+    <svg class="drawing" viewBox="0 0 650 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hilariously badly drawn smiling yellow banana with stick arms, a lopsided sun, and wonky stars">
+      <!-- sun: a yellow circle drawn very badly -->
+      <path d="M505 40 L505 16 M541 47 L558 30 M553 79 L583 81 M544 108 L559 125 M501 118 L498 143 M464 110 L445 125 M449 76 L421 73 M462 45 L444 30" fill="none" stroke="#f4a900" stroke-width="5" stroke-linecap="round"/>
+      <path d="M469 47 L489 35 L520 40 L540 61 L542 86 L525 111 L497 116 L469 108 L453 85 L453 64 Z" fill="#ffe200" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M482 71 L488 73 M515 72 L519 71 M486 92 L496 98 L511 94" fill="none" stroke="black" stroke-width="4" stroke-linecap="round"/>
+
+      <!-- a star drawn with the mouse, and not very well -->
+      <path d="M113 93 L120 117 L149 119 L128 137 L132 165 L113 149 L86 159 L94 137 L74 118 L105 118 Z" fill="#ff37b6" stroke="#0012f6" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M566 229 L572 247 L594 244 L584 264 L596 282 L574 277 L564 296 L557 270 L534 270 L551 257 Z" fill="#08d5fb" stroke="#1a23e9" stroke-width="4" stroke-linejoin="round"/>
+
+      <!-- very badly shaped banana -->
+      <path d="M175 96 L195 100 L206 137 L222 164 L244 190 L273 210 L307 222 L344 219 L370 209 L397 185 L411 167 L412 205 L396 242 L368 271 L323 292 L283 293 L242 277 L210 253 L191 220 L177 184 L170 149 Z" fill="#ffe400" stroke="#000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M177 96 L173 79 L183 69 L197 72 L195 103 Z" fill="#76512c" stroke="#000" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M412 168 L425 161 L425 180 L412 207 Z" fill="#76512c" stroke="#000" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M190 150 L202 191 L225 228 M235 248 L264 270" fill="none" stroke="#f2ab00" stroke-width="6" stroke-linecap="round"/>
+      <!-- silly uneven eyes -->
+      <circle cx="280" cy="237" r="14" fill="#fff" stroke="#000" stroke-width="5"/>
+      <circle cx="324" cy="238" r="12" fill="#fff" stroke="#000" stroke-width="5"/>
+      <circle cx="283" cy="239" r="5" fill="black"/>
+      <circle cx="321" cy="242" r="6" fill="black"/>
+      <path d="M289 260 L300 270 L314 266 L323 259" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round"/>
+      <!-- stick arms, legs, shoes -->
+      <path d="M207 224 L155 210 L139 185 M155 210 L130 222 M365 265 L418 256 L440 232 M418 256 L445 262 M278 292 L257 332 L232 341 M319 293 L344 333 L369 334" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- hand-drawn arrow and annotation -->
+      <path d="M102 246 L163 258 M143 241 L165 260 L138 271" fill="none" stroke="red" stroke-width="5" stroke-linecap="round"/>
+      <text x="21" y="238" transform="rotate(-12 21 238)" fill="red" font-size="23" font-weight="bold" font-family="Comic Sans MS, cursive">banana!!</text>
+      <!-- random childish lines -->
+      <path d="M74 350 L102 337 L130 351 L162 340 M472 353 L498 345 L525 353 L554 340" fill="none" stroke="#15b518" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    <p class="bottom">coming soon!!!!</p>
+  </main>
+</body>
+</html>
